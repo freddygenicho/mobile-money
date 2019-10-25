@@ -84,6 +84,7 @@ class Mpesa
     private function handleB2cResult()
     {
         $data = json_decode(request('Result'), true);
+        logger($data);
         $common = [
             'ResultType', 'ResultCode', 'ResultDesc', 'OriginatorConversationID', 'ConversationID', 'TransactionID'
         ];
