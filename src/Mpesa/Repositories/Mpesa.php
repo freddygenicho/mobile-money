@@ -37,9 +37,11 @@ class Mpesa
             'ResultDesc' => $data->ResultDesc,
         ];
         if ($data->ResultCode == 0) {
-            $_payload = $data->CallbackMetadata->Item;
-            foreach ($_payload as $callback) {
-                $real_data[$callback->Name] = @$callback->Value;
+            if (isset($data->CallbackMetadata->Item)) {
+                $_payload = $data->CallbackMetadata->Item;
+                foreach ($_payload as $callback) {
+                    $real_data[$callback->Name] = @$callback->Value;
+                }
             }
             $callback = MpesaStkCallback::create($real_data);
         } else {
